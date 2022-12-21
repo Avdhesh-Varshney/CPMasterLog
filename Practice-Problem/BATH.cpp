@@ -1,7 +1,7 @@
-// Rating Improvement
-// Problem Code - ADVANCE
+// Bath in Winters
+// Problem Code - BATH
 
-// https://www.codechef.com/problems/ADVANCE
+// https://www.codechef.com/problems/BATH
 
 // Solution:
 #include <iostream>
@@ -13,10 +13,7 @@ int main() {
 	for(int i = 0; i < t; i++) {
 	    int x, y;
 	    cin >> x >> y;
-	    if(((x+200) >= y) and (x <= y))
-	        cout << "YES\n";
-	    else
-	        cout << "NO\n";
+	    cout << x/(2*y) << endl;
 	}
 	return 0;
 }

@@ -1,7 +1,7 @@
-// AND Plus OR
-// Problem Code - ANDOR
+// Average of Three
+// Problem Code - AVGOF3
 
-// https://www.codechef.com/problems/ANDOR
+// https://www.codechef.com/problems/AVGOF3
 
 // Solution:
 #include <iostream>
@@ -9,11 +9,11 @@ using namespace std;
 int main() {
     // your code goes here
     int t;
-    long long int x;
     cin >> t;
     while(t--) {
+        int x;
         cin >> x;
-        cout << "0 "<<x<< endl;
+        cout << x-1 << " " << x << " " << x+1 << endl;
     }
     return 0;
 }
