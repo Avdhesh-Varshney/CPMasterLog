@@ -2,6 +2,8 @@
 // https://leetcode.com/problems/reverse-words-in-a-string-iii/
 
 // Solution:
+
+// Way :- 1
 class Solution {
 public:
     string reverseWords(string s) {
@@ -23,5 +25,20 @@ public:
         }
         t.pop_back();
         return t;
+    }
+};
+
+// Way :- 2
+class Solution {
+public:
+    string reverseWords(string s) {
+        istringstream iss(s);
+        string word, reversed_sentence = "";
+        while(iss >> word) {
+            reverse(word.begin(), word.end());
+            reversed_sentence += word + " ";
+        }
+        reversed_sentence.pop_back();
+        return reversed_sentence;
     }
 };

@@ -2,6 +2,8 @@
 // https://leetcode.com/problems/two-sum-ii-input-array-is-sorted/
 
 // Solution:
+
+// Way :- 1
 class Solution {
 public:
     vector<int> twoSum(vector<int>& numbers, int target) {
@@ -75,6 +77,25 @@ public:
             }
         }
         sort(ans.begin(), ans.end());
+        return ans;
+    }
+};
+
+// Way :- 2
+class Solution {
+public:
+    vector<int> twoSum(vector<int>& numbers, int target) {
+        int st = 0, lt = numbers.size()-1;
+        vector<int> ans;
+        while(st < lt) {
+            if(numbers[st] + numbers[lt] == target) {
+                ans.emplace_back(st+1);
+                ans.emplace_back(lt+1);
+                break;
+            }
+            else if(numbers[st]+numbers[lt] > target) lt--;
+            else st++;
+        }
         return ans;
     }
 };

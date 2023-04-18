@@ -2,6 +2,8 @@
 // https://leetcode.com/problems/find-first-and-last-position-of-element-in-sorted-array/
 
 // Solution:
+
+// Way :- 1
 class Solution {
 public:
     vector<int> searchRange(vector<int>& nums, int target) {
@@ -26,5 +28,19 @@ public:
         else if(ans.size() == 0)
             return {-1, -1};
         return ans;
+    }
+};
+
+// Way :- 2
+class Solution {
+public:
+    vector<int> searchRange(vector<int>& nums, int target) {
+        int st = find(nums.begin(), nums.end(), target) - nums.begin();
+        if(st != nums.size()) {
+            int lt = st;
+            for(; lt < nums.size(); lt++) if(nums[lt] != target) break;
+            return {st, lt-1};
+        }
+        return {-1, -1};
     }
 };
