@@ -13,6 +13,8 @@
  *     ListNode(int x, ListNode *next) : val(x), next(next) {}
  * };
  */
+
+// Way :- 1
 class Solution {
 public:
     ListNode* removeNthFromEnd(ListNode* head, int n) {
@@ -26,6 +28,23 @@ public:
             s = s->next;
         }
         s->next = s->next->next;
+        return head;
+    }
+};
+
+// Way :- 2
+class Solution {
+public:
+    ListNode* removeNthFromEnd(ListNode* head, int n) {
+        ListNode* nodes[30];
+        ListNode* cur = head;
+        int len = 0;
+        while(cur) {
+            nodes[len++] = cur;
+            cur = cur->next;
+        }
+        if(n == len) return head->next;
+        nodes[len-n-1]->next = nodes[len-n]->next;
         return head;
     }
 };

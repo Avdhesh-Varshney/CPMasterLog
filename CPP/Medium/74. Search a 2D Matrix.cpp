@@ -2,6 +2,8 @@
 // https://leetcode.com/problems/search-a-2d-matrix/
 
 // Solution:
+
+// Way :- 1
 class Solution {
 public:
     bool searchMatrix(vector<vector<int>>& matrix, int target) {
@@ -19,6 +21,22 @@ public:
         for(int j = 0; j < m; j++)
             if(matrix[id][j] == target)
                 return true;
+        return false;
+    }
+};
+
+// Way :- 2
+class Solution {
+public:
+    bool searchMatrix(vector<vector<int>>& matrix, int target) {
+        int n = matrix.size(), m = matrix[0].size(), id = 0;
+        int st = 0, lt = n*m - 1, mid;
+        while(st <= lt) {
+            mid = (lt-st)/2 + st;
+            if(matrix[mid/m][mid%m] == target) return true;
+            else if(matrix[mid/m][mid%m] < target) st = mid + 1;
+            else lt = mid - 1;
+        }
         return false;
     }
 };
