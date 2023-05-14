@@ -2,6 +2,8 @@
 // https://leetcode.com/problems/find-the-distance-value-between-two-arrays/
 
 // Solution:
+
+// Way :- 1
 class Solution {
 public:
     int findTheDistanceValue(vector<int>& arr1, vector<int>& arr2, int d) {
@@ -15,5 +17,26 @@ public:
             if(closest > d) ans++;
         }
         return ans;
+    }
+};
+
+// Way :- 2
+class Solution {
+public:
+    int findTheDistanceValue(vector<int>& arr1, vector<int>& arr2, int d) {
+        sort(arr2.begin(),arr2.end());
+        int cnt = 0;
+        for(int i = 0; i < arr1.size(); i++) {
+            int low = 0;
+            int high = arr2.size()-1;
+            while(low <= high) {
+                int mid = (high+low)/2;
+                if(abs(arr1[i]-arr2[mid]) <= d) break;
+                if (arr1[i] > arr2[mid]) low = mid+1;
+                else high = mid-1;
+            }
+            if (low > high) cnt++;
+        }
+        return cnt;
     }
 };
