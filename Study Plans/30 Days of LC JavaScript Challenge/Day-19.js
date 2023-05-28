@@ -1,48 +1,41 @@
-// Problem :- 2700. Differences Between Two Objects
-// Link :- https://leetcode.com/problems/differences-between-two-objects/?gio_link_id=LPdzgyA9
+// Problem :- 2675. Array of Objects to Matrix
+// Link :- https://leetcode.com/problems/array-of-objects-to-matrix/?gio_link_id=EoZk0Zy9
 
 // Solution:
 /**
- * @param {object} obj1
- * @param {object} obj2
- * @return {object}
+ * @param {Array} arr
+ * @return {Matrix}
  */
-function objDiff(obj1, obj2) {
-    function isObject(val) {
-        return typeof val === 'object' && val !== null && !Array.isArray(val);
-    }
-    function compare(obj1, obj2, path, result) {
-        if (isObject(obj1) && isObject(obj2)) {
-            for (const key in obj1) {
-                if (key in obj2) {
-                    compare(obj1[key], obj2[key], [...path, key], result);
-                }
-            }
-        } else if (Array.isArray(obj1) && Array.isArray(obj2)) {
-            const maxLength = Math.max(obj1.length, obj2.length);
-            for (let i = 0; i < maxLength; i++) {
-                if (i in obj1 && i in obj2) {
-                    compare(obj1[i], obj2[i], [...path, i], result);
-                }
-            }
-        } else if (obj1 !== obj2) {
-            if (path.length === 0) {
-                result = [obj1, obj2];
-            } else {
-                let currentObj = result;
-                for (let i = 0; i < path.length - 1; i++) {
-                    const key = path[i];
-                    if (!(key in currentObj)) {
-                        currentObj[key] = {};
-                    }
-                    currentObj = currentObj[key];
-                }
-                const lastKey = path[path.length - 1];
-                currentObj[lastKey] = [obj1, obj2];
+
+const jsonToMatrix = function (arr) {
+    const isObject = x => (x !== null && typeof x === 'object');
+    const getKeys = object => {
+        if (!isObject(object)) return [''];
+        const result = [];
+        for (const key of Object.keys(object)) {
+            const childKeys = getKeys(object[key]);
+            for (const childKey of childKeys) {
+                result.push(childKey ? `${key}.${childKey}` : key);
             }
         }
-    }
-    const result = {};
-    compare(obj1, obj2, [], result);
-    return result;
-}
+        return result;
+    };
+    const keys = Array.from(new Set(arr.reduce((acc, curr) => {
+        getKeys(curr).forEach(k => acc.add(k));
+        return acc;
+    }, new Set()))).sort();
+    const getValue = (obj, path) => {
+        const paths = path.split('.');
+        let i = 0;
+        let value = obj;
+        while (i < paths.length && isObject(value)) {
+            value = value[paths[i++]];
+        }
+        return i < paths.length || isObject(value) || value === undefined ? '' : value;
+    };
+    const matrix = [keys];
+    arr.forEach(obj => {
+        matrix.push(keys.map(key => getValue(obj, key)));
+    });
+    return matrix;
+};
