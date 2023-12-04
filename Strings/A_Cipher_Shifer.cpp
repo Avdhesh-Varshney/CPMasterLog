@@ -2,19 +2,16 @@
 using namespace std;
 
 int main() {
-    int t;
+    int t, n;
     cin >> t;
     while(t--) {
-        int n;
-        string s;
+        string s, ans = "";
         cin >> n >> s;
-        string ans = "";
-        char temp = s[0];
-        ans += temp;
-        for(int i = 1; i < n-1; i++) {
-            if(s[i] == temp) {
-                temp = s[++i];
-                ans += temp;
+        char ch = s[0];
+        for(int i = 1; i < n; i++) {
+            if(ch == s[i]) {
+                ans += ch;
+                if(i+1 < n) ch = s[++i];
             }
         }
         cout << ans << endl;
