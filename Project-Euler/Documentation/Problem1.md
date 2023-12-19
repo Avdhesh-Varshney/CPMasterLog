@@ -35,11 +35,11 @@ The intuition of this code calculates the sum of multiples of 3 and 5 below a gi
 
 ## Code/Solution 👨‍💻
 
-[C](https://github.com/Avdhesh-Varshney/Project-Euler/blob/main/C/Problem1.c) <br>
-[C++](https://github.com/Avdhesh-Varshney/Project-Euler/blob/main/C%2B%2B/Problem1.cpp) <br>
-[Java](https://github.com/Avdhesh-Varshney/Project-Euler/blob/main/Java/Problem1.java) <br>
-[JavaScript](https://github.com/Avdhesh-Varshney/Project-Euler/blob/main/JavaScript/Problem1.js) <br>
-[Python](https://github.com/Avdhesh-Varshney/Project-Euler/blob/main/Python/Problem1.py)
+[C](https://github.com/Avdhesh-Varshney/CPMasterLog/blob/main/Project-Euler/C/Problem1.c) <br>
+[C++](https://github.com/Avdhesh-Varshney/CPMasterLog/blob/main/Project-Euler/C%2B%2B/Problem1.cpp) <br>
+[Java](https://github.com/Avdhesh-Varshney/CPMasterLog/blob/main/Project-Euler/Java/Problem1.java) <br>
+[JavaScript](https://github.com/Avdhesh-Varshney/CPMasterLog/blob/main/Project-Euler/JavaScript/Problem1.js) <br>
+[Python](https://github.com/Avdhesh-Varshney/CPMasterLog/blob/main/Project-Euler/Python/Problem1.py)
 
 <br>
 
