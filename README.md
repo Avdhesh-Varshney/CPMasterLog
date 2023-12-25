@@ -86,7 +86,7 @@
       <a href="https://github.com/Avdhesh-Varshney">
         <img src="https://github.com/Avdhesh-Varshney/CPMasterLog/assets/114330097/0b13fac7-e59d-40be-ac14-b76a28174e85" width=185px height=175px />
       </a></br> 
-      <h4 style="color:red;"><a href="https://github.com-Avdhesh-Varshney">Avdhesh Varshney</a></h4>
+      <h4 style="color:red;"><a href="https://github.com/Avdhesh-Varshney">Avdhesh Varshney</a></h4>
       <a href="https://www.linkedin.com/in/avdhesh-varshney-5314a4233/">
         <img src="https://mpng.subpng.com/20180324/vhe/kisspng-linkedin-computer-icons-logo-social-networking-ser-facebook-5ab6ebfe5f5397.2333748215219374063905.jpg" width="32px" height="32px">
       </a>
