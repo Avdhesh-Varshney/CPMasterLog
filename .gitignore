@@ -88,3 +88,8 @@ bower_components
 # node-waf configuration
 .lock-wscript
 
+# Optional Python cache directory
+__pycache__
+
+# My virtual environment
+myenv
