@@ -10,6 +10,10 @@
 </div>
 <br />
 
+<a href="https://cpmasterlog.streamlit.app/">
+  <img src="https://github.com/user-attachments/assets/0f3b005d-16ed-412e-95ff-4df027b26fb9" alt="CP Master Log" />
+</a>
+
 ![Line](https://user-images.githubusercontent.com/85225156/171937799-8fc9e255-9889-4642-9c92-6df85fb86e82.gif)
 
 <!-- -------------------ABOUT SECTION---------------------- -->
@@ -24,12 +28,12 @@
 
 The project is organized into the following main directories:
 
-- **C-plus-plus**
-- **CodeChef**
-- **Codeforces**
-- **GeeksforGeeks**
-- **LeetCode**
-- **Project-Euler**
+- [**C++**](./C-plus-plus)
+- [**CodeChef**](./CodeChef)
+- [**Codeforces**](./Codeforces)
+- [**GeeksforGeeks**](./GeeksforGeeks)
+- [**LeetCode**](./LeetCode)
+- [**Project Euler**](./Project-Euler)
 
 <!-- ------------TECH STACK USED---------------------- -->
 ## :zap: Tech Stack Used ❤️
