@@ -1,63 +1,62 @@
 import streamlit as st
-import requests
+import os
 
-def fetch_contents(current_path):
-    items = {"Directories": [], "Files": [], 'Download_URL': []}
-    response = requests.get(current_path)
-    if response.status_code == 200:
-        contents = response.json()
-        for content in contents:
-            if content['type'] == 'dir':
-                items['Directories'].append(content['name'])
-            if content['type'] == 'file':
-                items['Files'].append(content['name'])
-                items['Download_URL'].append(content['download_url'])
+BASE_DIR = os.path.dirname(__file__)
+
+def fetchContents(current_path):
+    items = {"Directories": [], "Files": []}
+    for entry in os.listdir(current_path):
+        entry_path = os.path.join(current_path, entry)
+        if os.path.isdir(entry_path):
+            items['Directories'].append(entry)
+        elif os.path.isfile(entry_path):
+            items['Files'].append(entry)
     return items
 
-def show_file(file_name, file_path):
-    response = requests.get(file_path)
-    if response.status_code == 200:
-        code = response.text
-        if len(code) == 0:
-            st.info("File is empty!", icon="ℹ️")
-        else:
-            st.code(code, language=str(file_name.split('.')[-1].lower()))
-    else:
-        st.error(f"Failed to fetch file from URL: {file_path}", icon="🚨")
+def showFile(file_name, file_path):
+    try:
+        with open(file_path, 'r') as file:
+            code = file.read()
+            if len(code) == 0:
+                st.info("File is empty!", icon="ℹ️")
+            else:
+                st.code(code, language=str(file_name.split('.')[-1].lower()))
+    except UnicodeDecodeError:
+        st.warning("This file cannot be decoded. It's likely a binary file.", icon="⚠️")
 
-def code(github_username, repo_name):
-    current_path = f'https://api.github.com/repos/{github_username}/{repo_name}/contents'
-    items = fetch_contents(current_path)
+def showCode():
+    current_path = BASE_DIR
+    items = fetchContents(current_path)
     dir = 'Choose Directory'
     ite = 'Choose File'
     key = 1
 
     while True:
         if dir != 'Choose Directory':
-            current_path = current_path + f'/{dir}'
+            current_path = os.path.join(current_path, dir)
             dir = 'Choose Directory'
-            items = fetch_contents(current_path)
+            items = fetchContents(current_path)
 
         if items['Directories'] and items['Files']:
             x, y = st.columns(2)
             with x:
-                dir = st.selectbox(f"Choose from {current_path.split('/')[-1]} Directory:", ['Choose Directory'] + [item for item in items['Directories']], key=key)
-                key = key+1
+                dir = st.selectbox(f"Choose from {current_path.split(os.sep)[-1]} Directory:", ['Choose Directory'] + items['Directories'], key=key)
+                key += 1
             with y:
-                ite = st.selectbox("Choose Files:", ['Choose File'] + [item for item in items['Files']], key=key)
-                key = key+1
+                ite = st.selectbox("Choose Files:", ['Choose File'] + items['Files'], key=key)
+                key += 1
         elif items['Directories']:
-            dir = st.selectbox(f"Choose from {current_path.split('/')[-1]} Directory:", ['Choose Directory'] + [item for item in items['Directories']], key=key)
-            key = key+1
+            dir = st.selectbox(f"Choose from {current_path.split(os.sep)[-1]} Directory:", ['Choose Directory'] + items['Directories'], key=key)
+            key += 1
         elif items['Files']:
-            ite = st.selectbox("Choose Files:", ['Choose File'] + [item for item in items['Files']], key=key)
-            key = key+1
+            ite = st.selectbox("Choose Files:", ['Choose File'] + items['Files'], key=key)
+            key += 1
         else:
-            st.error(f"Failed to fetch file from URL: {current_path}", icon="🚨")
+            st.error(f"No files or directories found in: {current_path}", icon="🚨")
 
         if ite != 'Choose File':
             try:
-                show_file(ite, items['Download_URL'][items["Files"].index(ite)])
+                showFile(ite, os.path.join(current_path, ite))
             except:
                 st.warning("This file is *charmap codec*. So, It can't decoded.", icon="⚠️")
             ite = 'Choose File'
@@ -82,13 +81,19 @@ def dashboard():
         st.write("Visit [My GeeksforGeeks Profile](https://auth.geeksforgeeks.org/user/avdhesh_varshney/)")
         st.image("https://geeks-for-geeks-stats-api-napiyo.vercel.app/?userName=avdhesh_varshney&theme=dark", use_column_width=True)
 
+    colx, coly = st.columns(2)
+    with colx:
+        st.write("#### HackerRank Stats")
+        st.write("Visit [My HackerRank Profile](https://www.hackerrank.com/profile/avdheshvarshney1)")
+    with coly:
+        st.write("#### CodeChef Stats")
+        st.write("Visit [My CodeChef Profile](https://www.codechef.com/users/avdhesh15)")
 
 if __name__ == '__main__':
-    github_username = 'Avdhesh-Varshney'
-    repo_name = 'CPMasterLog'
-    st.header('My Problem Solving Skills')
+    st.title('My Problem Solving Skills')
+    st.divider()
     dashboard()
     st.divider()
     st.write('### My Code Files!')
-    code(github_username, repo_name)
+    showCode()
     st.info('If you liked it, ⭐ this repository. https://github.com/Avdhesh-Varshney/CPMasterLog', icon='💖')
