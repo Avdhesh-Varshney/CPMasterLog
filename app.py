@@ -6,11 +6,12 @@ BASE_DIR = os.path.dirname(__file__)
 def fetchContents(current_path):
     items = {"Directories": [], "Files": []}
     for entry in os.listdir(current_path):
-        entry_path = os.path.join(current_path, entry)
-        if os.path.isdir(entry_path):
-            items['Directories'].append(entry)
-        elif os.path.isfile(entry_path):
-            items['Files'].append(entry)
+        if not entry.startswith('.'):
+            entry_path = os.path.join(current_path, entry)
+            if os.path.isdir(entry_path):
+                items['Directories'].append(entry)
+            elif os.path.isfile(entry_path):
+                items['Files'].append(entry)
     return items
 
 def showFile(file_name, file_path):
