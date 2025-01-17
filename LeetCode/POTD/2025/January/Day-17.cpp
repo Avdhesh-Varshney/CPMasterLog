@@ -1,0 +1,11 @@
+// Problem Link: https://leetcode.com/problems/neighboring-bitwise-xor/
+
+// Solution:
+class Solution {
+public:
+    bool doesValidArrayExist(vector<int>& derived) {
+        int res = 0;
+        for(auto &i : derived) res ^= i;
+        return res == 0;
+    }
+};
